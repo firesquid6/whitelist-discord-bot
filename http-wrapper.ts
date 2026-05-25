@@ -161,7 +161,7 @@ function handleStream(req: Request, buf: LineBuffer): Response {
       };
 
       for (; cursor < buf.lines.length; cursor++) {
-        sendLine(cursor, buf.lines[cursor]);
+        sendLine(cursor, buf.lines[cursor]!);
       }
 
       if (buf.ended) {
@@ -172,7 +172,7 @@ function handleStream(req: Request, buf: LineBuffer): Response {
 
       sub = () => {
         while (cursor < buf.lines.length) {
-          sendLine(cursor, buf.lines[cursor]);
+          sendLine(cursor, buf.lines[cursor]!);
           cursor++;
         }
         if (buf.ended) {
