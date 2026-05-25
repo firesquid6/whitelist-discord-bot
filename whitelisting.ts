@@ -8,10 +8,10 @@ import {
 
 const DISCORD_TOKEN = process.env.DISCORD_TOKEN!;
 const CLIENT_ID = process.env.CLIENT_ID!;
-const PROCESS_PORT = process.env.PROCESS_PORT!;
+const PROCESS_URL = process.env.PROCESS_URL!;
 
-if (!DISCORD_TOKEN || !CLIENT_ID || !PROCESS_PORT) {
-  console.error("Missing required env vars: DISCORD_TOKEN, CLIENT_ID, PROCESS_PORT");
+if (!DISCORD_TOKEN || !CLIENT_ID || !PROCESS_URL) {
+  console.error("Missing required env vars: DISCORD_TOKEN, CLIENT_ID, PROCESS_URL");
   process.exit(1);
 }
 
@@ -62,7 +62,7 @@ client.on("interactionCreate", async (interaction) => {
   }
 
   try {
-    const res = await fetch(`http://localhost:${PROCESS_PORT}/stdin`, {
+    const res = await fetch(`${PROCESS_URL}/stdin`, {
       method: "POST",
       body: serverCommand,
     });

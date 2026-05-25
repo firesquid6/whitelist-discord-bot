@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 // this is used to spawn the minecraft server process
 
-import { spawn } from "node:child_process";
+import { spawn, type ChildProcess } from "node:child_process";
 import { parseArgs } from "node:util";
 import type { Readable } from "node:stream";
 
@@ -39,9 +39,9 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
   process.exit(1);
 }
 
-const [cmd, ...args] = cmdArgs;
+const [cmd, ...args] = cmdArgs as [string, ...string[]];
 
-const child = spawn(cmd, args, {
+const child: ChildProcess = spawn(cmd, args, {
   stdio: ["pipe", "pipe", "pipe"],
 });
 
